@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wheather app</title>
+    <style>
+        body{
+            margin:0;
+            padding: 0;
+            background-color: azure;
+        }
+        .container{
+            margin-top: 15%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 300px;
+            height: 400px;
+            padding: 50px;
+            background-color: rgb(200, 232, 240);
+            border-radius: 10px;
+            box-shadow: 10px;
+        }
+        #city{
+            width: 300px;
+            border: 1px solid rgb(94, 201, 203);
+            height: 30px;
+            border-radius: 10px;
+        }
+        .weather{
+            margin-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+            
+        }
+        #currentweather{
+            margin-top: 360px;
+            margin-left: 100px;
+           
+
+        }
+        .action{
+            background-color: rgb(103, 200, 235);
+            width: 200px;
+            height: 30px;
+            border: none;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-color: beige;
+            box-shadow: 10px beige;
+
+        }
+        .current{
+            margin-top: 20px;
+        }
+        .name{
+            display:inline;
+            display: flex;
+            align-items: center;
+            margin-left: 100px;
+            color:rgb(28, 143, 200);
+        }
+
+
+    </style>
+    <script>
+        function getData(){
+            var cityname=document.getElementById("city").value;
+            var temp=";"
+            const url="https://api.openweathermap.org/data/2.5/weather?q="+ cityname +
+            "&units=metric&appid=e531ee07e71dc861807f7d9d983641e2";
+            fetch(url)
+            .then((res) =>res.json())
+            .then((data) =>{
+                console.log(data.main.temp);
+                var temp=data.main.temp;
+                
+                document.getElementById("currentweather").innerText=
+                temp+" "+data.weather[0].description;
+            });
+            
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h4 class="name" color="blue">WEATHER APP</h4>
+        <input type="text" id="city" placeholder="Enter City Name"/>
+        <br/>
+        <div class="weather">
+            <img src="weather.png" width="100px" height="100px"/>
+        </div>
+          <div class="current"> <span id="currentweather"> current weather</span>
+        </div> 
+            <button class="action" Onclick="getData()" border-color="black">GET DETAILS</button>
+        
+    </div>
+    
+</body>
+</html>
